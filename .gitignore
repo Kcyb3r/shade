@@ -22,6 +22,7 @@ out/
 *.keystore
 !debug.keystore
 *.png
+!icon.png
 *.jpeg
 *.jpg
 *.gif
