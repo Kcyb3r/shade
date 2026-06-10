@@ -24,6 +24,7 @@ out/
 *.png
 !icon.png
 *.jpeg
+!app_logo.jpeg
 *.jpg
 *.gif
 *.bmp
