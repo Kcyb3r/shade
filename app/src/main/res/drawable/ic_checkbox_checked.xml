@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Border -->
+    <item>
+        <shape android:shape="rectangle">
+            <stroke
+                android:width="2dp"
+                android:color="#FFFFFF" />
+            <corners android:radius="2dp" />
+            <size
+                android:width="16dp"
+                android:height="16dp" />
+        </shape>
+    </item>
+    <!-- Tick symbol using vector path -->
+    <item
+        android:top="2dp"
+        android:bottom="2dp"
+        android:left="2dp"
+        android:right="2dp">
+        <vector
+            android:width="12dp"
+            android:height="12dp"
+            android:viewportWidth="12"
+            android:viewportHeight="12">
+            <path
+                android:strokeColor="#FFFFFF"
+                android:strokeWidth="2"
+                android:strokeLineCap="round"
+                android:strokeLineJoin="round"
+                android:pathData="M 2,6 L 5,9 L 10,3" />
+        </vector>
+    </item>
+</layer-list>

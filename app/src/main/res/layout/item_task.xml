@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginVertical="4dp"
+    app:cardBackgroundColor="@color/task_bg"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="1dp"
+    app:strokeWidth="0dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:minHeight="64dp">
+
+        <!-- Priority Indicator Strip -->
+        <View
+            android:id="@+id/priorityStrip"
+            android:layout_width="4dp"
+            android:layout_height="match_parent"
+            android:background="@color/priority_none" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/sequenceNumber"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginEnd="12dp"
+                android:gravity="center"
+                android:textColor="@color/accent_dim"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:background="@drawable/sequence_background"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackgroundBorderless" />
+
+            <ImageView
+                android:id="@+id/taskCheckbox"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginEnd="14dp"
+                android:src="@drawable/ic_checkbox_unchecked"
+                android:contentDescription="Task checkbox"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="2dp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textViewTask"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:lineSpacingExtra="4dp"
+                    android:fontFamily="sans-serif" />
+
+                <TextView
+                    android:id="@+id/dueDateText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:layout_marginTop="4dp"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/priorityIndicator"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/ic_priority_none"
+                android:contentDescription="Priority"
+                android:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/toggleCheckboxButton"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_marginStart="10dp"
+                android:src="@android:drawable/ic_menu_view"
+                android:contentDescription="Toggle checkbox in widget"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="2dp"
+                android:tint="@color/light_gray" />
+
+            <ImageView
+                android:id="@+id/deleteButton"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_marginStart="10dp"
+                android:src="@android:drawable/ic_menu_delete"
+                android:contentDescription="Delete task"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="2dp"
+                android:tint="@color/light_gray" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

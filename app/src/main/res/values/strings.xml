@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Shade</string>
+    <string name="add_task">Add Task</string>
+    <string name="edit_task">Edit Task</string>
+    <string name="enter_task">Enter a task...</string>
+    <string name="add">Add</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="no_tasks">No tasks yet in the shade.</string>
+
+    <!-- Priority -->
+    <string name="priority">Priority</string>
+    <string name="priority_none">None</string>
+    <string name="priority_low">Low</string>
+    <string name="priority_medium">Medium</string>
+    <string name="priority_high">High</string>
+    <string name="sort_by_priority">Sort by Priority</string>
+    <string name="set_due_date">Set due date</string>
+    <string name="remove_due_date">Remove due date</string>
+    <string name="due">Due</string>
+    <string name="overdue">Overdue</string>
+    <string name="due_today">Due today</string>
+    <string name="filter_due_today">Due today</string>
+</resources>

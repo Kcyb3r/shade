@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_filter_due_today"
+        android:icon="@android:drawable/ic_menu_day"
+        android:title="@string/filter_due_today"
+        android:checkable="true"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_sort_priority"
+        android:icon="@android:drawable/ic_menu_sort_by_size"
+        android:title="@string/sort_by_priority"
+        android:checkable="true"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_settings"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:title="Settings"
+        app:showAsAction="never" />
+</menu>

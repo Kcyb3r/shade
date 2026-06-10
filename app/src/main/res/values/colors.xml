@@ -1,0 +1,36 @@
+<resources>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="dark_gray">#121218</color>
+    <color name="gray">#2A2A35</color>
+    <color name="light_gray">#9E9EB8</color>
+    <color name="divider">#2A2A35</color>
+    <color name="transparent">#00000000</color>
+    <color name="task_bg">#1A1A24</color>
+    <color name="text_completed">#6B6B80</color>
+
+    <!-- Cool Tone Accents -->
+    <color name="accent">#00B4D8</color>
+    <color name="accent_dark">#0096C7</color>
+    <color name="accent_light">#48CAE4</color>
+    <color name="accent_dim">#8ECAE6</color>
+
+    <!-- Priority Colors -->
+    <color name="priority_high">#FF5E7D</color>
+    <color name="priority_medium">#FFB347</color>
+    <color name="priority_low">#4ECDC4</color>
+    <color name="priority_none">#4A4A5A</color>
+
+    <!-- Surface & Interaction -->
+    <color name="surface_overlay">#2A2A3C</color>
+    <color name="ripple">#40FFFFFF</color>
+    <color name="success">#4ECDC4</color>
+
+    <!-- Widget -->
+    <color name="widget_bg">#CC121218</color>
+
+    <!-- Due Date -->
+    <color name="overdue">#FF5E7D</color>
+    <color name="due_today">#FFB347</color>
+    <color name="due_future">#6B6B80</color>
+</resources>
