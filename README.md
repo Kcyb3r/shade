@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="app_logo.jpeg" alt="Shade logo" width="96">
+  <img src="app_logo.jpeg" alt="Shade logo" width="96" style="border-radius: 18px;">
   <h1>Shade</h1>
   <p>
     <strong>Minimal · Dark · Cool-toned task management for Android</strong>
