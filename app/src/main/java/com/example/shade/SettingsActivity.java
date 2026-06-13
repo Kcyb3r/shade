@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.google.android.material.checkbox.MaterialCheckBox;
 
@@ -56,6 +57,17 @@ public class SettingsActivity extends AppCompatActivity {
         selectedBackground = widgetPreferences.getWidgetBackground();
 
         setupBackgroundRadioButtons();
+
+        TextView versionText = findViewById(R.id.versionText);
+        try {
+            String versionName = getPackageManager()
+                    .getPackageInfo(getPackageName(), 0).versionName;
+            int versionCode = getPackageManager()
+                    .getPackageInfo(getPackageName(), 0).versionCode;
+            versionText.setText("v" + versionName + " (" + versionCode + ")");
+        } catch (Exception e) {
+            versionText.setText("v1.0");
+        }
 
         findViewById(R.id.saveButton).setOnClickListener(v -> saveSettings());
         findViewById(R.id.resetButton).setOnClickListener(v -> resetSettings());

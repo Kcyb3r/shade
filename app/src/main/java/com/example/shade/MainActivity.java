@@ -3,10 +3,12 @@ package com.example.shade;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,6 +23,7 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -54,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
 
         repository = new TaskRepository(this);
         widgetPreferences = new WidgetPreferences(this);
+
+        requestNotificationPermission();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -128,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
                 List<Task> tasks = repository.getTasks();
                 if (position >= 0 && position < tasks.size()) {
                     Task deletedTask = tasks.get(position);
+                    TaskNotificationHelper.cancelTaskNotification(MainActivity.this, deletedTask.getId());
                     repository.removeTask(deletedTask.getId());
                     loadTasks();
                     updateWidget();
@@ -135,6 +141,11 @@ public class MainActivity extends AppCompatActivity {
                     Snackbar.make(recyclerView, "Task deleted", Snackbar.LENGTH_LONG)
                             .setAction("UNDO", v -> {
                                 repository.addTask(deletedTask);
+                                if (deletedTask.hasDueDate()) {
+                                    TaskNotificationHelper.scheduleTaskNotification(
+                                            MainActivity.this, deletedTask.getId(),
+                                            deletedTask.getText(), deletedTask.getDueDate());
+                                }
                                 loadTasks();
                                 updateWidget();
                             })
@@ -358,6 +369,7 @@ public class MainActivity extends AppCompatActivity {
                 .setTitle("Delete Task")
                 .setMessage("Are you sure you want to delete this task?")
                 .setPositiveButton("Delete", (dialog, which) -> {
+                    TaskNotificationHelper.cancelTaskNotification(MainActivity.this, task.getId());
                     repository.removeTask(task.getId());
                     loadTasks();
                     updateWidget();
@@ -483,6 +495,12 @@ public class MainActivity extends AppCompatActivity {
                         repository.updateTask(task.getId(), taskText);
                         repository.updateTaskPriority(task.getId(), selectedPriority);
                         repository.updateTaskDueDate(task.getId(), selectedDueDate[0]);
+
+                        TaskNotificationHelper.cancelTaskNotification(MainActivity.this, task.getId());
+                        if (selectedDueDate[0] > 0) {
+                            TaskNotificationHelper.scheduleTaskNotification(MainActivity.this, task.getId(), taskText, selectedDueDate[0]);
+                        }
+
                         loadTasks();
                         updateWidget();
                     }
@@ -498,5 +516,15 @@ public class MainActivity extends AppCompatActivity {
                 new ComponentName(getApplication(), ShadeWidgetProvider.class));
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
         sendBroadcast(intent);
+    }
+
+    private void requestNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{android.Manifest.permission.POST_NOTIFICATIONS}, 1);
+            }
+        }
     }
 }

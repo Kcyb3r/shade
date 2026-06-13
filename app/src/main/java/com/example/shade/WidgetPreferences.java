@@ -13,6 +13,8 @@ public class WidgetPreferences {
     private static final String KEY_SHOW_DIVIDERS = "show_dividers";
     private static final String KEY_SHOW_ITEM_BG = "show_item_bg";
     private static final String KEY_WIDGET_BACKGROUND = "widget_background";
+    private static final String KEY_AMOLED_FRAME = "amoled_frame";
+    private static final int AMOLED_FRAME_COUNT = 6;
     private static final String DEFAULT_EMPTY_MESSAGE = "No tasks yet in the shade";
     private static final String DEFAULT_BACKGROUND = "teal";
 
@@ -54,6 +56,31 @@ public class WidgetPreferences {
         return preferences.getString(KEY_WIDGET_BACKGROUND, DEFAULT_BACKGROUND);
     }
 
+    public int getAmoledFrame() {
+        return preferences.getInt(KEY_AMOLED_FRAME, 0);
+    }
+
+    public void setAmoledFrame(int frame) {
+        preferences.edit().putInt(KEY_AMOLED_FRAME, frame % AMOLED_FRAME_COUNT).apply();
+    }
+
+    public void incrementAmoledFrame() {
+        int next = (getAmoledFrame() + 1) % AMOLED_FRAME_COUNT;
+        setAmoledFrame(next);
+    }
+
+    public static int getAmoledFrameDrawable(int frame) {
+        switch (frame % AMOLED_FRAME_COUNT) {
+            case 0: return R.drawable.widget_bg_amoled_01;
+            case 1: return R.drawable.widget_bg_amoled_02;
+            case 2: return R.drawable.widget_bg_amoled_03;
+            case 3: return R.drawable.widget_bg_amoled_04;
+            case 4: return R.drawable.widget_bg_amoled_05;
+            case 5: return R.drawable.widget_bg_amoled_06;
+            default: return R.drawable.widget_bg_amoled_01;
+        }
+    }
+
     public static Map<String, String> getBackgroundOptions() {
         Map<String, String> options = new LinkedHashMap<>();
         options.put("auto", "Auto");
@@ -62,6 +89,7 @@ public class WidgetPreferences {
         options.put("purple", "Purple");
         options.put("dark", "Dark");
         options.put("live", "Live");
+        options.put("amoled_bloom", "Amoled Bloom");
         options.put("transparent", "Transparent");
         return options;
     }
@@ -74,6 +102,7 @@ public class WidgetPreferences {
             case "purple": return R.drawable.widget_bg_purple;
             case "dark": return R.drawable.widget_bg_dark;
             case "live": return R.drawable.widget_bg_live;
+            case "amoled_bloom": return R.drawable.widget_bg_amoled_01;
             default: return 0;
         }
     }
@@ -93,6 +122,7 @@ public class WidgetPreferences {
             case "navy": return R.color.dark_gray;
             case "purple": return R.color.gray;
             case "live": return R.color.accent;
+            case "amoled_bloom": return R.color.dark_gray;
             case "dark": return R.color.dark_gray;
             default: return android.R.color.transparent;
         }

@@ -108,6 +108,10 @@ public class AddTaskActivity extends AppCompatActivity {
         newTask.setDueDate(selectedDueDate);
         repository.addTask(newTask);
 
+        if (selectedDueDate > 0) {
+            TaskNotificationHelper.scheduleTaskNotification(this, newTask.getId(), taskText, selectedDueDate);
+        }
+
         updateWidget();
         setResult(RESULT_OK);
         finish();

@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.widget.RemoteViews;
 
+import com.example.shade.AmoledBloomManager;
 import com.example.shade.MainActivity;
 import com.example.shade.R;
 import com.example.shade.TaskRepository;
@@ -35,13 +36,20 @@ public class ShadeWidgetProvider extends AppWidgetProvider {
         String bgPreset = widgetPreferences.getWidgetBackground();
         String resolvedPreset = bgPreset.equals("auto") ? WidgetPreferences.resolveAutoPreset() : bgPreset;
 
-        if (resolvedPreset.equals("transparent")) {
+        if (resolvedPreset.equals("amoled_bloom")) {
+            int frame = widgetPreferences.getAmoledFrame();
+            int drawableRes = WidgetPreferences.getAmoledFrameDrawable(frame);
+            views.setInt(R.id.widget_background, "setBackgroundResource", drawableRes);
+            AmoledBloomManager.scheduleNextFrame(context);
+        } else if (resolvedPreset.equals("transparent")) {
             views.setInt(R.id.widget_background, "setBackgroundColor", Color.TRANSPARENT);
+            AmoledBloomManager.cancelAnimation(context);
         } else {
             int drawableRes = WidgetPreferences.getBackgroundDrawableResId(resolvedPreset);
             if (drawableRes != 0) {
                 views.setInt(R.id.widget_background, "setBackgroundResource", drawableRes);
             }
+            AmoledBloomManager.cancelAnimation(context);
         }
 
         views.setTextViewText(R.id.empty_view, widgetPreferences.getEmptyMessage());
@@ -71,6 +79,12 @@ public class ShadeWidgetProvider extends AppWidgetProvider {
     public void onDeleted(Context context, int[] appWidgetIds) {
         for (int appWidgetId : appWidgetIds) {
             WidgetConfigActivity.deleteWidgetPrefs(context, appWidgetId);
+        }
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+        int[] remainingIds = appWidgetManager.getAppWidgetIds(
+                new android.content.ComponentName(context, ShadeWidgetProvider.class));
+        if (remainingIds == null || remainingIds.length == 0) {
+            AmoledBloomManager.cancelAnimation(context);
         }
     }
 

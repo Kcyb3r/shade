@@ -66,6 +66,23 @@ class ShadeRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
 
         views.setTextViewText(R.id.text1, task.getText());
 
+        int priorityIcon;
+        switch (task.getPriority()) {
+            case Task.PRIORITY_HIGH:
+                priorityIcon = R.drawable.ic_priority_high;
+                break;
+            case Task.PRIORITY_MEDIUM:
+                priorityIcon = R.drawable.ic_priority_medium;
+                break;
+            case Task.PRIORITY_LOW:
+                priorityIcon = R.drawable.ic_priority_low;
+                break;
+            default:
+                priorityIcon = R.drawable.ic_priority_none;
+                break;
+        }
+        views.setImageViewResource(R.id.priority_indicator, priorityIcon);
+
         if (!showItemBg) {
             views.setInt(R.id.item_widget_root, "setBackgroundColor", Color.TRANSPARENT);
         } else {
